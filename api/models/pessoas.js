@@ -27,8 +27,12 @@ module.exports = (sequelize, DataTypes) => {
     ativo: DataTypes.BOOLEAN,
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
-        notEmpty: true
+        notNull: true,
+        notEmpty: true,
+        isEmail: true,
+
       }
     },
     role: DataTypes.STRING
