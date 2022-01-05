@@ -1,12 +1,11 @@
-const database = require("../models");
-const Sequelize = require("sequelize");
+const { PessoasServices } = require('../services')
+const pessoasServices = new PessoasServices()
 
 class PessoaController {
   static async pegaPessoasAtivas(req, res) {
     try {
-      const pessoasAtivas = await database.Pessoas.findAll();
+      const pessoasAtivas = await pessoasServices.pegaRegistrosAtivos();
       return res.status(200).json(pessoasAtivas);
-      //"Pessoas" é o que está sendo retornado da classe models/pessoas.js, e findAll é um método do sequelize
     } catch (error) {
       return res.status(500).json(error.message);
     }
@@ -14,9 +13,8 @@ class PessoaController {
 
   static async pegaTodasAsPessoas(req, res) {
     try {
-      const todasAsPessoas = await database.Pessoas.scope("todos").findAll();
+      const todasAsPessoas = await pessoasServices.pegaTodosOsRegistros();
       return res.status(200).json(todasAsPessoas);
-      //"Pessoas" é o que está sendo retornado da classe models/pessoas.js, e findAll é um método do sequelize
     } catch (error) {
       return res.status(500).json(error.message);
     }
