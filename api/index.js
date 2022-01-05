@@ -7,5 +7,6 @@ const port = 3000;
 routes(app);
 
 app.listen(port, () => console.log(`Server running on port ${port}.`));
+//todos os códigos refatorados no repositório do curso
 
 module.exports = app;

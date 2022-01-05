@@ -1,29 +1,37 @@
-const database = require('../models')
+const database = require("../models");
 
 class Services {
-    constructor(nomeDoModelo){
-        this.nomeDoModelo = nomeDoModelo
-    }
+  constructor(nomeDoModelo) {
+    this.nomeDoModelo = nomeDoModelo;
+  }
 
-    async pegaTodosOsRegistros(){
-        return database[this.nomeDoModelo].findAll()
-    }
+  async pegaTodosOsRegistros() {
+    return database[this.nomeDoModelo].findAll();
+  }
 
-    async pegaUmRegistro(id){
-        return database[this.nomeDoModelo]
-    }
+  async pegaUmRegistro(id) {
+    return database[this.nomeDoModelo];
+  }
 
-    async criaRegistro(dados){
+  async criaRegistro(dados) {}
 
-    }
+  async atualizaRegistro(dadosAtualizados, id, transacao = {}) {
+    return database[this.nomeDoModelo].update(
+      dadosAtualizados,
+      { where: { id: id } },
+      transacao
+    );
+  }
 
-    async atualizaRegistro(dadosAtualizados, id){
+  async atualizaRegistros(dadosAtualizados, where, transacao = {}) {
+    return database[this.nomeDoModelo].update(
+      dadosAtualizados,
+      { where: { ...where } },
+      transacao
+    );
+  }
 
-    }
-
-    async apagaRegistro(id){
-        
-    }
+  async apagaRegistro(id) {}
 }
 
-module.exports = Services
+module.exports = Services;
